@@ -12,7 +12,13 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script id="vite-dev-entry" type="module" src="/src/main.tsx"></script>
+    <script>
+      // When served unbuilt from GitHub Pages (main branch root), redirect to built bundle in docs/
+      if (window.location.hostname.endsWith('github.io') && document.getElementById('vite-dev-entry')?.getAttribute('src')?.includes('main.tsx')) {
+        var p = window.location.pathname.replace(/\/+$/, '');
+        window.location.replace(p + '/docs/');
+      }
+    </script>
   </body>
 </html>
-
